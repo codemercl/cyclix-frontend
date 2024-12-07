@@ -1,0 +1,64 @@
+.booking {
+  padding: '20px';
+  background-color: '#1f1f1f';
+  min-height: '100vh';
+  display: grid;
+  grid-template-columns: auto 300px;
+  gap: 20px;
+}
+
+.table {
+  color: #EDEDED;
+
+  .info {
+    background-color: #1f1f1f;
+
+    h3 {
+      color: #EDEDED;
+      padding: 20px;
+      border-radius: 5px;
+      font-weight: 400;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  h3 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #EDEDED;
+  }
+
+  p {
+    color: #a1a1a1;
+    font-size: 13px;
+  }
+
+  ul {
+    display: grid;
+
+    li {
+      background-color: #1f1f1f;
+      border-radius: 5px;
+      padding: 8px 25px;
+    }
+  }
+
+  span {
+    color: #888;
+    font-size: 13px;
+  }
+
+  .button {
+    color: #fff;
+    cursor: pointer;
+    font-size: 25px;
+    margin-left: auto;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

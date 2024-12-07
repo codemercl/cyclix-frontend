@@ -1,0 +1,36 @@
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 53vh;
+
+  form {
+    background: linear-gradient(to right, #01010126, #231b2f33);
+
+
+    h3 {
+      background: linear-gradient(to right, white, grey);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      text-align: center;
+      font-size: 15px;
+      text-transform: uppercase;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    color: #EDEDED;
+    margin: 0 auto;
+
+    button {
+      margin-top: 20px;
+    }
+  }
+}

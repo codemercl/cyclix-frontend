@@ -1,0 +1,17 @@
+.menu {
+    display: flex;
+    gap: 30px;
+    font-size: 14px;
+
+    li {
+        a {
+            text-decoration: none;
+            color: #888;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}

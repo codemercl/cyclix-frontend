@@ -1,0 +1,23 @@
+.nav {
+  display: flex;
+  gap: 50px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding: 10px 0;
+
+  h4 {
+    background: linear-gradient(to right, white, grey);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .controll {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+  }
+}
