@@ -10,7 +10,7 @@ import { FaHome } from "react-icons/fa";
 
 const Prices = async () => {
     return (
-        <section className={styles.prices}>
+        <section className={styles.prices} id="sign-up-section">
             <div className={styles.column}>
                 <div className={styles.head}>
                     <h1>Basic</h1>

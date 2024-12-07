@@ -1,6 +1,6 @@
 import About from "../components/About/About";
 import Hero from "../components/Hero/Hero";
-import Prices from "../components/Prices/Welcome";
+import Prices from "../components/Prices/Prices";
 import Welcome from "../components/Welcome/Welcome";
 import "../styles/global.css";
 

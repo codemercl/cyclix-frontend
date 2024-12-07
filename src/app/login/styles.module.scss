@@ -46,8 +46,19 @@
       padding: 5px 10px;
     }
 
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+
     button {
       margin-top: 30px;
     }
+  }
+}
+
+@media (max-width: 575px) {
+  .login {
+    padding: 20px;
   }
 }

@@ -1,0 +1,162 @@
+.login {
+  display: flex;
+  gap: 50px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  color: #fff;
+
+  form {
+    background: linear-gradient(to right, #01010126, #231b2f33);
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px 100px;
+  }
+
+  h1 {
+    font-size: 24px;
+
+    .gradientText {
+      background: linear-gradient(to right, white, grey);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+
+  }
+
+  .controll {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+
+    label {
+      color: #888;
+      font-size: 13px;
+    }
+
+    input {
+      border: 1px solid #888;
+      border-radius: 5px;
+      height: 40px;
+      width: 100%;
+      color: #fff;
+      padding: 5px 10px;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+
+    button {
+      margin-top: 30px;
+    }
+  }
+}
+
+.prices {
+  display: flex;
+  color: #fff;
+
+  .column {
+    padding: 15px;
+    height: 510px;
+    display: flex;
+    flex-direction: column;
+
+    &:not(:first-child) {
+      border-left: 1px solid rgb(31 31 31);
+    }
+
+    &:nth-child(2) {
+      position: relative;
+      border-left: 1px solid rgb(31 31 31);
+
+      &:after {
+        content: "Popular";
+        position: absolute;
+        top: -30px;
+        left: 0;
+        background-color: white;
+        color: #000;
+        height: 20px;
+        padding: 5px;
+        border-radius: 0 15px 0 0;
+        font-size: 14px;
+      }
+    }
+
+    .head {
+      h1 {
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: 400;
+      }
+
+      p {
+        color: #a1a1a1;
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 25px;
+
+        span {
+          color: #fff;
+        }
+      }
+    }
+
+    .body {
+      display: grid;
+      gap: 20px 10px;
+      margin-top: 30px;
+
+      .items {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        span {
+          color: #a1a1a1;
+          font-size: 15px;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .footer {
+      margin-top: auto;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .login {
+    form {
+      padding: 20px;
+    }
+
+    .column {
+      height: 100%;
+      .footer {
+        margin-top: 50px;
+      }
+    }
+  }
+
+  .prices {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    .column {
+      border: 1px solid rgb(31 31 31);
+    }
+  }
+}
