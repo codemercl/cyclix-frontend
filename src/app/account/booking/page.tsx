@@ -7,6 +7,7 @@ import { CiSquareRemove } from "react-icons/ci";
 import styles from './styles.module.scss';
 import Button from '@/src/components/Button/Button';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 type TariffType = {
     name: string;
@@ -24,16 +25,15 @@ const Booking = () => {
     const [selectedDates, setSelectedDates] = useState<Dayjs[]>([]);
     const [selectedTimes, setSelectedTimes] = useState<Record<string, Dayjs | null>>({});
     const [currentTariff, setCurrentTariff] = useState<TariffType | null>(null);
+    const [priceFromCookies, setPriceFromCookies] = useState<string | null>(null);
     const router = useRouter();
 
     useEffect(() => {
-        const price = localStorage.getItem('price');
-        if (price) {
-            const matchedTariff = tariffs[price] || tariffs.Basic; 
-            setCurrentTariff(matchedTariff);
-        } else {
-            setCurrentTariff(tariffs.Basic);
-        }
+        const price = Cookies.get('price');
+        setPriceFromCookies(price || 'Basic');
+
+        const matchedTariff = tariffs[price || 'Basic'] || tariffs.Basic;
+        setCurrentTariff(matchedTariff);
     }, []);
 
     const handleDateSelect = (value: Dayjs) => {
@@ -72,16 +72,22 @@ const Booking = () => {
     };
 
     const handleSubmit = async () => {
-        const payload = selectedDates.map(date => ({
-            date: date.format('YYYY-MM-DD'),
-            time: selectedTimes[date.format('YYYY-MM-DD')]?.format('HH:mm') || null,
-        }));
+        const access_token = Cookies.get('access_token');
+
+        const payload = selectedDates.map(date => {
+            const time = selectedTimes[date.format('YYYY-MM-DD')];
+            return {
+                start: `${date.format('YYYY-MM-DD')}T${time?.format('HH:mm') || '00:00'}:00Z`,
+                end: `${date.format('YYYY-MM-DD')}T${time?.add(2, 'hour')?.format('HH:mm') || '02:00'}:00Z`,
+            };
+        });
 
         try {
-            const response = await fetch('http://localhost:4001', {
+            const response = await fetch('https://cyclix-backend.vercel.app/api/bookings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${access_token}`,
                 },
                 body: JSON.stringify(payload),
             });
@@ -90,7 +96,8 @@ const Booking = () => {
                 alert('Booking successful!');
                 router.push('/account/slots');
             } else {
-                alert('Error booking dates. Please try again.');
+                const error = await response.json();
+                alert(`Error booking dates: ${error.message || 'Please try again.'}`);
             }
         } catch (error) {
             alert('Network error. Please check your connection.');
@@ -149,7 +156,7 @@ const Booking = () => {
                     <div className={styles.table}>
                         <div className={styles.info}>
                             <h3>
-                                In the tariff <b>{currentTariff.name}</b> you have access to: <span>{currentTariff.maxDates} days</span> a year
+                                In the tariff <b>{priceFromCookies || currentTariff.name}</b> you have access to: <span>{currentTariff.maxDates} days</span> a year
                             </h3>
                         </div>
                         <h3>Your selected dates:</h3>

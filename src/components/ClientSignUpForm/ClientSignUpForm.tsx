@@ -15,9 +15,11 @@ import { MdCleaningServices } from "react-icons/md";
 import { RiBikeLine } from "react-icons/ri";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
+import { useSelectedPrice } from '../../hooks/useSelectedPrice';
 
 
 const ClientSignUpForm = () => {
+    const { selectedPrices } = useSelectedPrice();
     const router = useRouter();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');

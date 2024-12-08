@@ -1,11 +1,11 @@
 import Cookies from 'js-cookie';
-
+// email, password, role, name, selectedPrice
 export async function signUp(
   email: string,
   password: string,
   role: string,
-  price: string,
-  name: string
+  name: string,
+  selectedPrice: string,
 ): Promise<{ success: boolean; error?: string }> {
   try {
     const response = await fetch('https://cyclix-backend.vercel.app/api/auth/sign-up', {
@@ -13,7 +13,7 @@ export async function signUp(
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password, role, price, name }),
+      body: JSON.stringify({ email, password, role, price: selectedPrice, name }),
     });
 
     if (!response.ok) {
@@ -24,6 +24,8 @@ export async function signUp(
     const data = await response.json();
 
     Cookies.set('access_token', data.access_token, { expires: 7, secure: true });
+    Cookies.set('role', data.role, { expires: 7, secure: true });
+    Cookies.set('price', data.price, { expires: 7, secure: true });
 
     return { success: true };
   } catch (err: any) {

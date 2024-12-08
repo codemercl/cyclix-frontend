@@ -6,7 +6,8 @@ import Button from '@/src/components/Button/Button';
 import styles from './styles.module.scss';
 
 import { LoadingOutlined } from '@ant-design/icons';
-import { Flex, Spin } from 'antd';
+import { Spin } from 'antd';
+import { signin } from '../actions/auth';
 
 
 const Login = () => {
@@ -21,29 +22,15 @@ const Login = () => {
     setError('');
     setIsLoading(true);
 
-    try {
-      const response = await fetch('https://cyclix-backend.vercel.app/api/auth/sign-in', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    const result = await signin(email, password);
 
-      if (!response.ok) {
-        throw new Error('Failed to log in. Please check your credentials.');
-      }
-
-      const data = await response.json();
-      console.log('Login successful:', data);
-
+    if (result.success) {
       router.push('/account/booking');
-    } catch (err: any) {
-      console.error('Login error:', err);
-      setError(err.message || 'An unexpected error occurred.');
-    } finally {
-      setIsLoading(false);
+    } else {
+      setError(result.error || 'An unexpected error occurred.');
     }
+
+    setIsLoading(false);
   };
 
   return (

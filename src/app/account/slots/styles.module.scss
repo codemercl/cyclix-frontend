@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 50px;
 
     h3 {
       font-size: 20px;
@@ -44,16 +45,42 @@
 
     .element {
       display: grid;
-      grid-template-columns: 1.3fr 3fr 1fr;
-      background-color: #2f2f2f;
+      background: linear-gradient(to right, #01010126, #231b2f33);
+      gap: 10px;
       padding: 10px;
       color: #fff;
       text-align: left;
 
       p {
-        color: #aeaaaa;
+        color: #fff;
+        span {
+          color: #aeaaaa;
+        }
       }
     }
   }
 
+}
+
+.indecator {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 100%;
+}
+
+@media (max-width: 872px) {
+  .slots {
+    padding: 0 10px;
+
+    .info {
+      padding: 10px 0px;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+    }
+  }
 }

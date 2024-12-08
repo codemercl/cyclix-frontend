@@ -19,6 +19,7 @@
 
     .gif {
         animation: rotate 90s linear infinite;
+
         @keyframes rotate {
             0% {
                 transform: rotate(0deg);
@@ -33,5 +34,25 @@
     .controll {
         display: flex;
         gap: 20px;
+    }
+}
+
+@media (max-width: 1028px) {
+    .welcome {
+        padding: 0;
+        h1 {
+            font-weight: 400;
+            color: #fff;
+            font-size: 17px;
+
+            span {
+                color: #A1A1A1;
+            }
+        }
+
+        .controll {
+            display: flex;
+            flex-direction: column;
+        }
     }
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { SiHiveBlockchain } from "react-icons/si";
 import Button from "../Button/Button";
 import styles from "./styles.module.scss"
@@ -7,8 +9,11 @@ import { MdCleaningServices } from "react-icons/md";
 import { RiBikeLine } from "react-icons/ri";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
+import { useSelectedPrice } from "../../hooks/useSelectedPrice";
 
 const Prices = async () => {
+    const { handlePriceSelect } = useSelectedPrice();
+
     return (
         <section className={styles.prices} id="sign-up-section">
             <div className={styles.column}>
@@ -39,7 +44,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large">
+                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Basic")}>
                         Choose
                     </Button>
                 </div>
@@ -76,7 +81,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large">
+                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Standard")}>
                         Choose
                     </Button>
                 </div>
@@ -113,7 +118,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large">
+                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Premium")}>
                         Choose
                     </Button>
                 </div>
@@ -150,7 +155,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large">
+                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Premium+")}>
                         Choose
                     </Button>
                 </div>

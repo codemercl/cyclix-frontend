@@ -26,3 +26,12 @@
     }
 
 }
+
+@media (max-width: 1028px) {
+    .column {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+    }
+}
