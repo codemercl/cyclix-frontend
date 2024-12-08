@@ -25,7 +25,7 @@ const Login = () => {
     const result = await signin(email, password);
 
     if (result.success) {
-      router.push('/account/booking');
+      router.push('/account/slots');
     } else {
       setError(result.error || 'An unexpected error occurred.');
     }
