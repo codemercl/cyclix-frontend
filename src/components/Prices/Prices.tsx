@@ -9,10 +9,19 @@ import { MdCleaningServices } from "react-icons/md";
 import { RiBikeLine } from "react-icons/ri";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
-import { useSelectedPrice } from "../../hooks/useSelectedPrice";
+import { useSelectedPrice } from "../../hooks/useSelectedPriceContext";
+import { useRouter } from 'next/navigation';
 
-const Prices = async () => {
-    const { handlePriceSelect } = useSelectedPrice();
+const Prices = () => {
+    const router = useRouter();
+    const { setSelectedPrice } = useSelectedPrice();
+
+    const handleGetData = (price: string) => {
+        if (price) {
+            setSelectedPrice(price);
+            router.push('/signup');
+        }
+    };
 
     return (
         <section className={styles.prices} id="sign-up-section">
@@ -44,7 +53,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Basic")}>
+                    <Button variant="tertiary" size="large" onClick={() => handleGetData("Basic")}>
                         Choose
                     </Button>
                 </div>
@@ -81,7 +90,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Standard")}>
+                    <Button variant="tertiary" size="large" onClick={() => handleGetData("Standard")}>
                         Choose
                     </Button>
                 </div>
@@ -118,7 +127,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Premium")}>
+                    <Button variant="tertiary" size="large" onClick={() => handleGetData("Premium")}>
                         Choose
                     </Button>
                 </div>
@@ -155,7 +164,7 @@ const Prices = async () => {
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <Button variant="tertiary" size="large" onClick={() => handlePriceSelect("Premium+")}>
+                    <Button variant="tertiary" size="large" onClick={() => handleGetData("Premium+")}>
                         Choose
                     </Button>
                 </div>

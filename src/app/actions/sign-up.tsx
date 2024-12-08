@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-// email, password, role, name, selectedPrice
 export async function signUp(
   email: string,
   password: string,

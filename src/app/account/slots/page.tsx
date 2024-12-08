@@ -111,7 +111,15 @@ const Slots: React.FC = () => {
                     {bookings.map((booking, i) => (
                         <li key={booking._id} className={styles.element}>
                             <p><span>Day:</span> {i + 1}</p>
-                            <p><span>Date:</span> {new Date(booking.start).toLocaleString()}</p>
+                            {new Intl.DateTimeFormat('en-GB', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                hourCycle: 'h23',
+                                timeZone: 'UTC', // Если нужно сохранить время в UTC
+                            }).format(new Date(booking.start))}
                         </li>
                     ))}
                 </ul>

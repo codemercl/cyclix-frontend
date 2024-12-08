@@ -29,10 +29,10 @@ const Booking = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const price = Cookies.get('price');
-        setPriceFromCookies(price || 'Basic');
+        const price = Cookies.get('price') || 'Basic';
+        setPriceFromCookies(price);
 
-        const matchedTariff = tariffs[price || 'Basic'] || tariffs.Basic;
+        const matchedTariff = tariffs[price] || tariffs.Basic;
         setCurrentTariff(matchedTariff);
     }, []);
 
@@ -40,33 +40,43 @@ const Booking = () => {
         if (!currentTariff) return;
 
         const formattedDate = value.startOf('day');
-        const alreadySelected = selectedDates.some(date => date.isSame(formattedDate, 'day'));
+        setSelectedDates((prevSelectedDates) => {
+            const alreadySelected = prevSelectedDates.some(date => date.isSame(formattedDate, 'day'));
 
-        if (alreadySelected) {
-            setSelectedDates(selectedDates.filter(date => !date.isSame(formattedDate, 'day')));
-            const formattedKey = formattedDate.format('YYYY-MM-DD');
-            const updatedTimes = { ...selectedTimes };
-            delete updatedTimes[formattedKey];
-            setSelectedTimes(updatedTimes);
-        } else if (selectedDates.length < currentTariff.maxDates) {
-            setSelectedDates([...selectedDates, formattedDate]);
-        } else {
-            console.log(`You can only select up to ${currentTariff.maxDates} dates with the ${currentTariff.name} plan.`);
-        }
+            if (alreadySelected) {
+                // Remove the date
+                const updatedDates = prevSelectedDates.filter(date => !date.isSame(formattedDate, 'day'));
+                setSelectedTimes((prevTimes) => {
+                    const updatedTimes = { ...prevTimes };
+                    delete updatedTimes[formattedDate.format('YYYY-MM-DD')];
+                    return updatedTimes;
+                });
+                return updatedDates;
+            } else if (prevSelectedDates.length < currentTariff.maxDates) {
+                // Add the date
+                return [...prevSelectedDates, formattedDate];
+            } else {
+                console.log(`You can only select up to ${currentTariff.maxDates} dates with the ${currentTariff.name} plan.`);
+                return prevSelectedDates;
+            }
+        });
     };
 
     const handleDateRemove = (dateToRemove: Dayjs) => {
-        setSelectedDates(selectedDates.filter(date => !date.isSame(dateToRemove, 'day')));
-        const formattedKey = dateToRemove.format('YYYY-MM-DD');
-        const updatedTimes = { ...selectedTimes };
-        delete updatedTimes[formattedKey];
-        setSelectedTimes(updatedTimes);
+        setSelectedDates((prevSelectedDates) => 
+            prevSelectedDates.filter(date => !date.isSame(dateToRemove, 'day'))
+        );
+        setSelectedTimes((prevTimes) => {
+            const updatedTimes = { ...prevTimes };
+            delete updatedTimes[dateToRemove.format('YYYY-MM-DD')];
+            return updatedTimes;
+        });
     };
 
     const handleTimeChange = (date: Dayjs, time: Dayjs | null) => {
         const formattedKey = date.format('YYYY-MM-DD');
-        setSelectedTimes(prev => ({
-            ...prev,
+        setSelectedTimes((prevTimes) => ({
+            ...prevTimes,
             [formattedKey]: time,
         }));
     };
@@ -115,7 +125,7 @@ const Booking = () => {
                 style={{
                     backgroundColor: isSelected ? '#1890ff' : undefined,
                     borderRadius: '50%',
-                    cursor: 'pointer',
+                    cursor: isMaxSelected && !isSelected ? 'not-allowed' : 'pointer',
                     width: '10px',
                     height: '10px',
                 }}
@@ -182,7 +192,7 @@ const Booking = () => {
                             <p>No dates selected.</p>
                         )}
                         {selectedDates.length > 0 && (
-                            <Button variant="primary" size="small" onClick={handleSubmit}>
+                            <Button variant="primary" size="small" onClick={handleSubmit} disabled={selectedDates.some(date => !selectedTimes[date.format('YYYY-MM-DD')])}>
                                 Book dates and times
                             </Button>
                         )}

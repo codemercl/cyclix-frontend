@@ -6,12 +6,12 @@ import "../styles/global.css";
 
 const Home = async () => {
   return (
-    <main className='app'>
-      <Hero />
-      <About />
-      <Welcome />
-      <Prices />
-    </main>
+      <main className='app'>
+        <Hero />
+        <About />
+        <Welcome />
+        <Prices />
+      </main>
   );
 };
 

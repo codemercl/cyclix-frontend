@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { signUp } from '../../app/actions/sign-up';
 import { useRouter } from 'next/navigation';
 import Button from '@/src/components/Button/Button';
@@ -15,11 +15,11 @@ import { MdCleaningServices } from "react-icons/md";
 import { RiBikeLine } from "react-icons/ri";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
-import { useSelectedPrice } from '../../hooks/useSelectedPrice';
+import { useSelectedPrice } from '../../hooks/useSelectedPriceContext';
 
 
 const ClientSignUpForm = () => {
-    const { selectedPrices } = useSelectedPrice();
+    const ssss = useSelectedPrice();
     const router = useRouter();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -35,6 +35,12 @@ const ClientSignUpForm = () => {
         setStep(2);
     };
 
+    useEffect(() => {
+        if (ssss.selectedPrice) {
+            setStep(2);
+        }
+    }, [ssss.selectedPrice])
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError("");
@@ -42,7 +48,7 @@ const ClientSignUpForm = () => {
 
         const role = "user";
 
-        const result = await signUp(email, password, role, name, selectedPrice || "");
+        const result = await signUp(email, password, role, name, ssss.selectedPrice ? ssss.selectedPrice : selectedPrice || "");
 
         setIsLoading(false);
 

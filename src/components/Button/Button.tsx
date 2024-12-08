@@ -6,13 +6,14 @@ interface ButtonProps {
   size: 'small' | 'large';
   children: React.ReactNode;
   onClick?: () => void;
+  disabled?: any;
 }
 
-const Button: React.FC<ButtonProps> = ({ variant, size, children, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ variant, size, children, onClick, disabled }) => {
   const className = `${styles.button} ${styles[variant]} ${styles[size]}`;
 
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

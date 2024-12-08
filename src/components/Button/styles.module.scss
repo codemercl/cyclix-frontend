@@ -44,4 +44,11 @@
     font-size: 16px;
     border-radius: 15px;
   }
+
+  &:disabled {
+    background-color: #A9A9A9; /* Серый цвет для disabled кнопки */
+    color: #666; /* Более светлый текст */
+    cursor: not-allowed; /* Изменение курсора */
+    border-color: #A9A9A9; /* Цвет границы, если есть */
+  }
 }
