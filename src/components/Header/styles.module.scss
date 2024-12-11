@@ -5,6 +5,10 @@
   align-items: center;
   color: #fff;
   padding: 10px 0;
+  position: sticky;
+  top: 0;
+  background-color: black;
+  z-index: 3;
 
   h4 {
     background: linear-gradient(to right, white, grey);

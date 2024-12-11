@@ -7,9 +7,10 @@
 
     .item {
         min-width: 100px;
-        padding: 15px;
-
-        border-left: 1px solid rgb(31 31 31);
+        border: 1px solid #333;
+        padding: 20px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #000 30%, #0a0a0a 50%, #0a0a0a 100%);
 
         p {
             color: #a1a1a1;

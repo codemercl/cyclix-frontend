@@ -7,30 +7,16 @@
     margin: 0 auto;
     gap: 40px;
 
-    .image {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: -1;
-        opacity: 0.1;
-        width: 300px;
-        height: 300px;
-        animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
-        }
-
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
     h1 {
-        color: #EDEDED;
-        font-size: 72px;
+        p {
+            color: #EDEDED;
+            font-size: 72px;
+        }
+
+        span {
+            color: #EDEDED;
+            font-size: 72px;
+        }
 
         .gradientText {
             background: linear-gradient(to right, white, grey);
@@ -38,6 +24,28 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bold;
+
+            animation: squirrelRun 4s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes squirrelRun {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            25% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            75% {
+                transform: translateX(100%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(200%);
+                opacity: 0;
+            }
         }
 
     }
@@ -65,10 +73,13 @@
 
         h1 {
             font-size: 40px;
+            p {
+                display: none;
+            }
         }
 
         p {
-            font-size: 16px;
+            display: none;
         }
     }
 }
